@@ -8,13 +8,7 @@ import { createStore } from 'redux'
 
 import App from './app'
 
-const reducer = (state = 0, action) => {
-  switch(action.type){
-    case 'INCREMENT': return ++state
-    case 'DECREMENT': return --state
-    default: return state
-  }
-}
+import reducer from 'reducers/counters'
 
 const store = createStore(reducer)
 

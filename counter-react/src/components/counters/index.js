@@ -2,20 +2,28 @@ import React from 'react'
 
 import Counter from 'components/counter';
 import { connect } from 'react-redux'
+import {  addCounter, removeCounter, increment, decrement } from 'reducers/counters/action-creators'
 
-const Counters = ({counter, decrement, increment}) => (
-  <div style={{display: 'flex', justifyContent: 'space-around'}}>
-    {[0,0,0].map((item, index) => (
-      <Counter key={index} counter={counter} increment={increment} decrement={decrement}/>
-    ))}
+const Counters = ({counters, addCounter, removeCounter, increment, decrement}) => (
+  <div>
+    <div style={{display: 'flex', justifyContent: 'space-around'}}>
+      {counters.map((counter, index) => (
+        <Counter {...{ key: index, counter, removeCounter: removeCounter(index), increment: increment(index), decrement: decrement(index) }} />
+      ))}
+    </div>
+    <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 10}}>
+      <button onClick={addCounter}>Add Counter</button>
+    </div>
   </div>
 )
 
-const mapStateToProps = state => ({ counter: state })
+const mapStateToProps = state => ({ counters: state })
 
 const mapDispatchToProps = dispatch => ({
-  increment: () => dispatch({type: 'INCREMENT'}),
-  decrement: () => dispatch({type: 'DECREMENT'})
+  addCounter: () => dispatch(addCounter()),
+  removeCounter: (index) => () => dispatch(removeCounter(index)),
+  decrement: (index) => () => dispatch(decrement(index)),
+  increment: (index) => () => dispatch(increment(index))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counters)

@@ -1,10 +1,11 @@
-import counters, {
+import counters, { initialState } from './index'
+
+import {
     ADD_COUNTER,
     REMOVE_COUNTER,
     INCREMENT,
-    DECREMENT,
-    initialState
-} from './index'
+    DECREMENT
+} from './actions'
 
 import { expect } from 'chai'
 

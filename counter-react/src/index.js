@@ -3,12 +3,27 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+
 import App from './app'
+
+const reducer = (state = 0, action) => {
+  switch(action.type){
+    case 'INCREMENT': return ++state
+    case 'DECREMENT': return --state
+    default: return state
+  }
+}
+
+const store = createStore(reducer)
 
 const renderApp = (NextApp) => {
   render(
     <AppContainer>
-      <NextApp />
+      <Provider store={store}>
+        <NextApp />
+      </Provider>
     </AppContainer>,
     document.querySelector('[data-js="app"]')
   )

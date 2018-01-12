@@ -1,13 +1,13 @@
 'use strict'
 
-import React  from 'react'
+import React from 'react'
 
-import CounterContainer from './components/counter'
+import Counters from './components/counters'
 
 import './css/style.css'
 
 const App = () => (
-  <CounterContainer />
+  <Counters />
 )
 
 export default App
